@@ -1,94 +1,136 @@
-import {Component} from "react";
+import { Component } from 'react';
 
-class StatePrac3 extends Component {
-
+class ClassState4 extends Component {
     constructor(props) {
         super(props);
+
+        //state 초기화
         this.state = {
-            idx : 1,
-            select : '',
-            allList : [],
-            viewList : [],
-        }
-
-        this.writeContent = this.writeContent.bind(this);
-        this.changeSelect = this.changeSelect.bind(this);
-        this.searchContent = this.searchContent.bind(this);
+            inputWriter: '', //작성자
+            inputTitle: '', //제목
+            comments: [], //입력한 내용
+            inputSearch: '', //검색내용
+            searchType: 'title', //검색타입
+            results: [], //검색결과
+        };
+        //바인딩
+        this.onChange = this.onChange.bind(this);
+        this.addComment = this.addComment.bind(this);
+        this.searchComment = this.searchComment.bind(this);
     }
 
-    writeContent()  {
-        this.setState((prevState) => {
-            const writer = document.getElementById('writer').value;
-            const title = document.getElementById('title').value;
+    onChange(e) {
+        //console.log(e.target);
+        this.setState({ inputWriter: e.target.value });
+    }
 
-            // this.state.allList.push({writer : writer, title : title, idx : this.state.idx});
-            const arr = {writer : writer, title : title, idx : this.state.idx};
-            return ({
-                idx : prevState.idx + 1,
-                allList : [...prevState.allList, arr],
-                viewList : this.state.allList,
-            });
+    addComment() {
+        const newComment = {
+            writer: this.state.inputWriter,
+            title: this.state.inputTitle,
+        };
+        this.setState({ comments: [...this.state.comments, newComment], inputTitle: '', inputWriter: '' });
+    }
+
+    searchComment() {
+        const searchResult = this.state.comments.filter((value) => {
+            console.log(value[this.state.searchType]);
+            console.log(value[this.state.searchType].includes(this.state.inputSearch));
+            const type = value[this.state.searchType];
+            const include = type.includes(this.state.inputSearch);
+            if (!include) {
+                return false;
+            }
+            return true;
+            // if (value[this.state.searchType].includes(this.state.inputSearch)) {
+            //     return true;
+            // } else {
+            //     return false;
+            // }
         });
-    }
-
-    changeSelect() {
-        this.setState(() => {
-            const select = document.getElementById('select');
-            const opt = select.options[select.selectedIndex].value;
-
-            return ({ select : opt });
-        })
-    }
-
-    searchContent() {
-        this.setState((prevState) => {
-            const val = document.getElementById('search').value;
-            let newList = this.state.allList.filter((idx)=> {
-                if(this.state.select === 'writer')
-                    return idx.writer.includes(`${val}`);
-                else
-                    return idx.title.includes(`${val}`);
-            })
-
-            return ({ viewList : newList });
-        })
+        this.setState({ results: searchResult });
     }
 
     render() {
+        const { inputWriter, inputTitle, comments, inputSearch, searchType, results } = this.state;
         return (
             <>
-                <fieldset>
-                    작성자 : <input type="text" placeholder="작성자" id="writer"/>
-                    &nbsp;&nbsp; 제목 : <input type="text" id="title"/>
-                    <button onClick={this.writeContent}>작성</button>
-                </fieldset>
-                <select name="" id="select" onChange={this.changeSelect}>
-                    <option value="writer">작성자</option>
-                    <option value="title">제목</option>
-                </select>
-                &nbsp;&nbsp; <input type="text" placeholder="검색어" id="search"/>
-                &nbsp;&nbsp;
-                <button onClick={this.searchContent}>검색</button>
-                <br/>
-                <table>
+                <form>
+                    <label htmlFor="writer">작성자:</label>
+                    {/* onChange: input, textarea, select 값이 변경될때마다 발생하는 이벤트 핸들러 */}
+                    <input type="text" id="writer" value={inputWriter} onChange={(e) => this.onChange(e)} />
+                    <label htmlFor="title">제목:</label>
+                    <input
+                        type="text"
+                        id="title"
+                        value={inputTitle}
+                        onChange={(e) => this.setState({ inputTitle: e.target.value })}
+                    />
+                    <button type="button" onClick={this.addComment}>
+                        작성
+                    </button>
+                </form>
+                <form>
+                    <select value={searchType} onChange={(e) => this.setState({ searchType: e.target.value })}>
+                        <option value="writer">작성자</option>
+                        <option value="title">제목</option>
+                    </select>
+                    <input
+                        type="text"
+                        placeholder="검색어"
+                        value={inputSearch}
+                        onChange={(e) => this.setState({ inputSearch: e.target.value })}
+                    />
+                    <button type="button" onClick={this.searchComment}>
+                        검색
+                    </button>
+                </form>
+
+                <table border={1} cellSpacing={0}>
+                    <thead>
                     <tr>
                         <th>번호</th>
                         <th>제목</th>
                         <th>작성자</th>
                     </tr>
-                    {this.state.viewList.map((value, idx) => {
+                    </thead>
+                    <tbody>
+                    {/* [ {title, writer},{title, writer},{title, writer}... ] */}
+                    {comments.map((value, index) => {
                         return (
-                            <tr>
-                                <td>{value.idx}</td>
+                            <tr key={index}>
+                                <td>{index + 1}</td>
                                 <td>{value.title}</td>
                                 <td>{value.writer}</td>
                             </tr>
-                            )
+                        );
                     })}
+                    </tbody>
+                </table>
+                <h4>검색결과</h4>
+                <table border={1} cellSpacing={0}>
+                    <thead>
+                    <tr>
+                        <th>번호</th>
+                        <th>제목</th>
+                        <th>작성자</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {results.map((value, index) => {
+                        return (
+                            <tr key={index}>
+                                <td>{index + 1}</td>
+                                <td>{value.title}</td>
+                                <td>{value.writer}</td>
+                            </tr>
+                        );
+                    })}
+                    </tbody>
                 </table>
             </>
-        )
+        );
     }
 }
 
-export default StatePrac3;
+export default ClassState4;
