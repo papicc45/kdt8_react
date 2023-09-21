@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/../kdt_0920.iml" filepath="$PROJECT_DIR$/../kdt_0920.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../kdt_0920_state.iml" filepath="$PROJECT_DIR$/../kdt_0920_state.iml" />
     </modules>
   </component>
 </project>
