@@ -1,0 +1,34 @@
+.header {
+    text-align: center;
+    background-color: skyblue;
+    padding: 20px;
+    font-size: 20px;
+    font-weight: bolder;
+}
+
+.loading {
+    height: 400px;
+    text-align: center;
+    background-color: lightblue;
+    font-size: 60px;
+    font-weight: bolder;
+}
+
+.index {
+    color: skyblue;
+    font-size: 20px;
+}
+
+.title {
+    color: lightcoral;
+}
+
+.body {
+    padding: 20px;
+}
+
+.contentBox {
+    margin : 20px;
+    background-color: lightblue;
+    border-radius: 10px;
+}
