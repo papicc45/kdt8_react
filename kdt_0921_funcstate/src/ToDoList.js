@@ -9,7 +9,10 @@ export default function ToDoList() {
             alert("할일이 너무 많아요 !");
             return;
         }
-        setTodoList([...todoList, todo]);
+        if(todo !== '') {
+            setTodoList([...todoList, todo]);
+            setTodo('');
+        }
     }
     const deleteTodo = () => {
         let newList = [];
