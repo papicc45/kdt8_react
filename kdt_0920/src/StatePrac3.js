@@ -1,6 +1,9 @@
-import { Component } from 'react';
+import React from 'react';
 
-class ClassState4 extends Component {
+class ClassState4 extends React.Component {
+    inputWriter = React.createRef();
+    inputTitle = React.createRef();
+
     constructor(props) {
         super(props);
 
@@ -25,6 +28,14 @@ class ClassState4 extends Component {
     }
 
     addComment() {
+        if(this.inputWriter.current.value === '') {
+            this.inputWriter.current.focus();
+            return;
+        }
+        if(this.inputTitle.current.value === '') {
+            this.inputTitle.current.focus();
+            return;
+        }
         const newComment = {
             writer: this.state.inputWriter,
             title: this.state.inputTitle,
@@ -56,13 +67,14 @@ class ClassState4 extends Component {
         return (
             <>
                 <form>
-                    <label htmlFor="writer">작성자:</label>
+                    <label htmlFor="writer" >작성자:</label>
                     {/* onChange: input, textarea, select 값이 변경될때마다 발생하는 이벤트 핸들러 */}
-                    <input type="text" id="writer" value={inputWriter} onChange={(e) => this.onChange(e)} />
+                    <input type="text" id="writer" ref={this.inputWriter} value={inputWriter} onChange={(e) => this.onChange(e)} />
                     <label htmlFor="title">제목:</label>
                     <input
                         type="text"
                         id="title"
+                        ref={this.inputTitle}
                         value={inputTitle}
                         onChange={(e) => this.setState({ inputTitle: e.target.value })}
                     />
