@@ -1,0 +1,42 @@
+@import './utils.scss';
+
+.SassComponent {
+  display: flex;
+  //중첩
+  .box {
+    @include box(100px);
+    //width: 100px;
+    //height: 100px;
+    border: 1px solid black;
+
+    //& : 중첩 안에서 키워드는 부모 선택자를 참조하여 치환
+    // 하나의 태그에 여러 클래스 같이 존재할 때
+    &.red {
+      background-color: $color-red;
+    }
+
+    &.orange {
+      background-color: $color-orange;
+    }
+
+    &.yellow {
+      background-color: $color-yellow
+    }
+
+    &.green {
+      background-color: $color-green;
+    }
+
+    &.blue {
+      background-color: $color-blue;
+    }
+
+    &.navy {
+      background-color : $color-navy;
+    }
+
+    &.purple {
+      background-color: $color-purple;
+    }
+  }
+}

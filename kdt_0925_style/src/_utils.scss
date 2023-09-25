@@ -1,0 +1,15 @@
+//_utils.scss
+//Scss 파일명 앞에 _를 붙여서 작성하면 파일단위로 분리되어 컴파일되지 않음
+
+$color-red : #ff0000;
+$color-orange : orange;
+$color-yellow : yellow;
+$color-green : green;
+$color-blue : blue;
+$color-navy : navy;
+$color-purple : #b734b7;
+
+@mixin box($size) {
+  width: $size;
+  height: $size;
+}

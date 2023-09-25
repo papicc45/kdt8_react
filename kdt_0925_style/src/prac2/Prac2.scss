@@ -1,0 +1,25 @@
+@import "./Prac2";
+
+.circles {
+  .circle {
+    position: relative;
+
+    &.circle1 {
+      @include setSize(40px, pink);
+      @include rotateCircle(animate1, 20px);
+      animation: animate1 2s ease infinite;
+    }
+
+    &.circle2 {
+      @include setSize(40px, yellow);
+      @include rotateCircle(animate2, 40px);
+      animation: animate2 2s ease infinite;
+    }
+
+    &.circle3 {
+      @include setSize(40px, green);
+      @include rotateCircle(animate3, 60px);
+      animation: animate3 2s ease infinite;
+    }
+  }
+}

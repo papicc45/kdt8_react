@@ -1,0 +1,24 @@
+
+@mixin setSize($size, $color) {
+  width: $size;
+  height: $size;
+  border-radius: $size - $size/2;
+  background-color: $color;
+}
+
+@mixin rotateCircle($name, $val) {
+  @keyframes #{$name} {
+    25% {
+      transform: translateX($val);
+    }
+    50% {
+      transform: translate($val, $val);
+    }
+    75% {
+      transform: translateY($val);
+    }
+  }
+}
+
+
+

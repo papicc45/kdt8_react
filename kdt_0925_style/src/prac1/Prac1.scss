@@ -1,0 +1,65 @@
+@import "src/prac1/Prac1";
+
+img {
+  width: 400px;
+  height: 200px;
+  left: 200px;
+  top: 100px;
+  position: absolute;
+}
+
+.item {
+  @include setSIze(70px);
+  border-radius: 35px;
+  background-color: bisque;
+
+  &.item1 {
+    background-color: pink;
+    left: 250px;
+    top: 150px;
+  }
+
+  &.item2 {
+    background-color: palevioletred;
+    left: 280px;
+    top: 179px;
+  }
+
+  &.item3 {
+    background-color: plum;
+    left: 321px;
+    top: 182px;
+  }
+
+  &.item4 {
+    background-color: orchid;
+    left: 360px;
+    top: 194px;
+  }
+
+  &.item5 {
+    background-color: pink;
+    left: 400px;
+    top: 211px;
+    z-index: 9999;
+  }
+}
+
+
+.eye1 {
+  @include setSIze(26px);
+  border-radius: 13px;
+  background-color: dimgrey;
+  left: 261px;
+  top: 161px;
+  z-index: 9998;
+}
+
+.eye2 {
+  @include setSIze(16px);
+  border-radius: 8px;
+  background-color: black;
+  z-index: 9999;
+  left: 262px;
+  top: 162px;
+}
