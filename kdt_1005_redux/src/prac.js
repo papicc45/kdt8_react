@@ -3,16 +3,15 @@ import { createStore } from 'redux';
 const input = document.getElementById('todo');
 const addBtn = document.getElementById('addTodo');
 const ul = document.getElementById('ul');
-let closeBtns = document.getElementsByClassName('closeBtn');
 let count = 1;
 const liReducer = (state = [], action) => {
     switch (action.type) {
         case 'ADD' :
             const todo = { id : count++, text : input.value };
-            return state = [...state, todo];
+            return [...state, todo];
         case 'DELETE' :
             const newList = state.filter((value) => value.id !== action.index);
-            return state = newList;
+            return newList;
         default:
             return state;
     }
