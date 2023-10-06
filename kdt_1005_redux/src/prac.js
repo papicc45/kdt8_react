@@ -42,11 +42,3 @@ addBtn.addEventListener('click', ()=> {
    liStore.dispatch({ type : 'ADD' });
    input.value = '';
 });
-
-
-for(let i=0 ; i<closeBtns.length ; i++) {
-    closeBtns[i].addEventListener('click', ()=> {
-        console.log('asd');
-       liStore.dispatch({ type : 'DELETE', index :  i+1});
-    });
-}
